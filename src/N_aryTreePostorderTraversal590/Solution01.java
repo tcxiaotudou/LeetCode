@@ -1,5 +1,6 @@
 package N_aryTreePostorderTraversal590;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,9 @@ import java.util.List;
  * @Version 1.0
  */
 public class Solution01 {
+
+    List<Integer> list = new ArrayList<>();
+
     class Node {
         public int val;
         public List<Node> children;
@@ -23,6 +27,15 @@ public class Solution01 {
     }
 
     public List<Integer> postorder(Node root) {
-
+        if (root == null)
+            return list;
+        List<Node> nodes = root.children;
+        if (nodes.size() > 0 ) {
+            nodes.stream().forEach(e -> {
+                postorder(e);
+            });
+        }
+        list.add(root.val);
+        return list;
     }
 }
